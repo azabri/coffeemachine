@@ -1,0 +1,74 @@
+package machine;
+import java.util.Scanner;
+
+public class CoffeeMachine {
+    public static void main(String[] args) {
+        System.out.println("Starting to make a coffee");
+        System.out.println("Grinding coffee beans");
+        System.out.println("Boiling water");
+        System.out.println("Mixing boiled water with crushed coffee beans");
+        System.out.println("Pouring coffee into the cup");
+        System.out.println("Pouring some milk into the cup");
+        System.out.println("Coffee is ready!");
+
+        int water = 200;
+        int milk = 50;
+        int bean = 15;
+
+        Scanner scanner =  new Scanner(System.in);
+
+        //System.out.println("Write how many cups of coffee you will need: ");
+        //int coffeeNeeded = scanner.nextInt();
+        //System.out.println("For " + coffeeNeeded + "cups of coffee you will need:");
+        //System.out.println(coffeeNeeded * water + " ml of water");
+        //System.out.println(coffeeNeeded * milk + " ml of milk");
+        //System.out.println(coffeeNeeded * bean + " g of coffee beans");
+
+        System.out.println("Write how many ml of water the coffee machine has: ");
+        int watersupply = scanner.nextInt();
+
+        System.out.println("Write how many ml of milk the coffee machine has: ");
+        int milksupply = scanner.nextInt();
+
+        System.out.println("Write how many grams of coffee beans the coffee machine has: ");
+        int beanssupply = scanner.nextInt();
+
+        System.out.println("Write how many cups of coffee you will need: ");
+        int coffeeNeeded = scanner.nextInt();
+
+        
+        if (watersupply == 0 && coffeeNeeded == 0 && milksupply == 0 && beanssupply == 0){
+            System.out.println("Yes, I can make that amount of coffee");
+        } else if (coffeeNeeded*water > watersupply || coffeeNeeded*milk > milksupply || coffeeNeeded*bean > beanssupply) {
+            int w = watersupply/200;
+            int m = milksupply/50;
+            int b = beanssupply/15;
+            if (w > 0 && m > 0 && b > 0) {
+                if (w <= m && w <= b){
+                    System.out.println("No, I can make only " + w + " cup(s) of coffee");
+                } else if (m <= w && m <= b){
+                    System.out.println("No, I can make only " + m + " cup(s) of coffee");
+                } else if (b <= m && b <= w){
+                    System.out.println("No, I can make only " + b + " cup(s) of coffee");
+                }
+            } else {
+                System.out.println("No, I can make only 0 cup(s) of coffee");
+            }
+        } else if ((watersupply - coffeeNeeded * water)/200 == 0 || (milksupply - coffeeNeeded * milk)/50 == 0 || (beanssupply - coffeeNeeded * bean)/15 == 0) {
+            System.out.println("Yes, I can make that amount of coffee");
+        } else {
+            int w = (watersupply - coffeeNeeded * water)/200;
+            int m = (milksupply - coffeeNeeded * milk)/50;
+            int b = (beanssupply - coffeeNeeded * bean)/15;
+            if (w <= m && w <= b){
+                System.out.println("Yes, I can make that amount of coffee (and even " + w +  " more than that)");
+            } else if (m <= w && m <= b){
+                System.out.println("Yes, I can make that amount of coffee (and even " + m +  " more than that)");
+            } else if (b <= m && b <= w){
+                System.out.println("Yes, I can make that amount of coffee (and even " + b +  " more than that)");
+            }
+
+
+        }
+    }
+}
